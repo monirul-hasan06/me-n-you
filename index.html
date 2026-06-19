@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>me and you</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: red;
+            color: powderblue;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        /* Main container - fully responsive */
+        div.container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 700px;
+            padding: 20px;
+        }
+
+        /* Heading "me & you" */
+        .heading {
+            font-size: clamp(32px, 8vw, 56px);
+            font-weight: bold;
+            color: powderblue;
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Flex row for the two people */
+        .people-row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            width: 100%;
+        }
+
+        /* Each person card */
+        .person {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1 1 200px;
+            min-width: 150px;
+            max-width: 280px;
+        }
+
+        /* Images - responsive sizing */
+        img {
+            width: 100%;
+            max-width: 180px;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 50%;
+            padding: 5px;
+            margin: 5px;
+            transition: transform 0.3s ease;
+            border: 3px solid powderblue;
+        }
+
+        /* Image hover effect */
+        img:hover {
+            transform: scale(1.08);
+            border-color: white;
+        }
+
+        /* Links and text */
+        a {
+            color: powderblue;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Name styling */
+        .name {
+            font-size: clamp(18px, 4vw, 28px);
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+            color: powderblue;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .name a {
+            font-size: inherit;
+        }
+
+        /*Mobile First - Extra small devices (phones, 320px and up) */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            div.container {
+                padding: 10px;
+            }
+
+            .heading {
+                font-size: 28px;
+                margin-bottom: 20px;
+            }
+
+            .people-row {
+                gap: 20px;
+            }
+
+            .person {
+                flex: 1 1 100%;
+                min-width: 120px;
+                max-width: 200px;
+            }
+
+            img {
+                max-width: 140px;
+            }
+
+            .name {
+                font-size: 18px;
+            }
+        }
+
+        /*Tablets and small laptops (481px to 768px) */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .heading {
+                font-size: 40px;
+            }
+
+            .people-row {
+                gap: 25px;
+            }
+
+            .person {
+                flex: 1 1 180px;
+                max-width: 220px;
+            }
+
+            img {
+                max-width: 160px;
+            }
+
+            .name {
+                font-size: 22px;
+            }
+        }
+
+        /*Desktops (769px and up) */
+        @media (min-width: 769px) {
+            .heading {
+                font-size: 48px;
+            }
+
+            .people-row {
+                gap: 40px;
+            }
+
+            .person {
+                flex: 1 1 220px;
+                max-width: 280px;
+            }
+
+            img {
+                max-width: 200px;
+            }
+
+            .name {
+                font-size: 26px;
+            }
+        }
+
+        /*Large screens (1200px and up) */
+        @media (min-width: 1200px) {
+            .heading {
+                font-size: 56px;
+            }
+
+            .person {
+                max-width: 300px;
+            }
+
+            img {
+                max-width: 220px;
+            }
+
+            .name {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Heading -->
+        <div class="heading">me & you</div>
+
+        <!-- Two People Row -->
+        <div class="people-row">
+            <!-- Person 1: Rumi -->
+            <div class="person">
+                <a href="https://www.facebook.com/monirul.hasan06">
+                    <img src="images/pokie_1.jpg" alt="photo of Rumi">
+                </a>
+                <div class="name">
+                    <a href="https://www.facebook.com/rezbi.ahmed.rumi.2024">Rumi</a>
+                </div>
+            </div>
+
+            <!-- Person 2: Hafsa -->
+            <div class="person">
+                <a href="https://www.facebook.com/joyeeta.asraf">
+                    <img src="images/pokie_2.png" alt="photo of Hafsa">
+                </a>
+                <div class="name">
+                    <a href="https://www.facebook.com/hoshiiikoo">Hafsa</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
