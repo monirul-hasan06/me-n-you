@@ -236,6 +236,60 @@
     z-index: 0;
     pointer-events: none;    /* lets clicks pass through to buttons */
 }
+    /*button style*/
+        #playBtn {
+    position: fixed;
+    bottom: clamp(20px, 5vh, 40px);
+    right: clamp(20px, 5vw, 40px);
+    width: clamp(60px, 10vw, 80px);
+    height: clamp(60px, 10vw, 80px);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    color: white;
+    font-size: clamp(24px, 4vw, 32px);
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+#playBtn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}
+
+#playBtn:active {
+    transform: scale(0.92);
+}
+
+/* Extra small phones */
+@media (max-width: 380px) {
+    #playBtn {
+        width: 55px;
+        height: 55px;
+        font-size: 20px;
+        bottom: 15px;
+        right: 15px;
+    }
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    #playBtn {
+        width: 85px;
+        height: 85px;
+        font-size: 36px;
+    }
+}
     </style>
 </head>
 <body>
@@ -266,7 +320,10 @@
             </div>
         </div>
     </div>
-    
+
+    <!-- Glass Play/Pause Button -->
+<button id="playBtn">▶</button>
+
     <!-- for love animation javascript first editon [269 line to 371 line]-->
     <script> 
         const canvas = document.getElementById('heart-canvas');
@@ -369,6 +426,50 @@ function drawHearts() {
     requestAnimationFrame(drawHearts);  // loop forever
 }
 drawHearts();
+
+//Audio JavaScript added editon two.
+    // Load your pre-set song
+const audio = new Audio('last_night.mp3');
+const playBtn = document.getElementById('playBtn');
+
+// Preload the song
+audio.load();
+
+// Play/Pause toggle
+playBtn.addEventListener('click', function() {
+    if (audio.paused) {
+        audio.play();
+        this.textContent = '⏸';
+        this.style.background = 'rgba(255, 77, 122, 0.25)';
+        this.style.borderColor = 'rgba(255, 77, 122, 0.5)';
+        this.style.boxShadow = '0 8px 32px rgba(255, 77, 122, 0.3)';
+    } else {
+        audio.pause();
+        this.textContent = '▶';
+        this.style.background = 'rgba(255, 255, 255, 0.12)';
+        this.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+        this.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.25)';
+    }
+});
+
+// Reset when song ends
+audio.addEventListener('ended', function() {
+    playBtn.textContent = '▶';
+    audio.currentTime = 0;
+    playBtn.style.background = 'rgba(255, 255, 255, 0.12)';
+    playBtn.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+    playBtn.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.25)';
+});
+
+// Error handling
+audio.addEventListener('error', function() {
+    console.error('Could not load "last_night.mp3". Make sure the file exists.');
+    playBtn.textContent = '⚠';
+    setTimeout(() => {
+        playBtn.textContent = '▶';
+    }, 2000);
+});
+
     </script>
 </body>
 </html>
