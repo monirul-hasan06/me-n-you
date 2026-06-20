@@ -301,6 +301,216 @@
         font-size: 36px;
     }
 }
+/* ========================================
+   QUOTE - Message Style (Small, Centered)
+   ======================================== */
+#quoteContainer {
+    position: fixed;
+    top: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    text-align: center;
+    padding: 0 20px;
+    width: 100%;
+    max-width: 700px;
+    pointer-events: none;
+}
+
+#quoteDisplay {
+    display: inline-block;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: clamp(14px, 2vw, 20px);
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(204, 187, 227, 0.79);
+    text-shadow: 
+        0 1px 12px rgba(0, 0, 0, 0.6),
+        0 2px 30px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+    padding: 6px 16px;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    user-select: none;
+    position: relative;
+    max-width: 90%;
+}
+
+/* Subtle quote marks */
+#quoteDisplay::before {
+    content: '"';
+    font-size: 1.4em;
+    color: rgba(255, 77, 122, 0.3);
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    font-family: 'Georgia', serif;
+}
+
+#quoteDisplay::after {
+    content: '"';
+    font-size: 1.4em;
+    color: rgba(255, 77, 122, 0.3);
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    font-family: 'Georgia', serif;
+}
+
+/* Small decorative line under quote */
+#quoteDisplay::after {
+    content: '"';
+    font-size: 1.4em;
+    color: rgba(255, 77, 122, 0.3);
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    font-family: 'Georgia', serif;
+}
+
+/* Decorative line */
+#quoteDisplay .line {
+    display: block;
+    width: 30px;
+    height: 2px;
+    margin: 4px auto 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 77, 122, 0.2), transparent);
+    border-radius: 2px;
+}
+
+#quoteDisplay.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#quoteDisplay.fading {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: all 0.5s ease;
+}
+
+/* ========================================
+   DARK MODE SUPPORT
+   ======================================== */
+[data-theme="dark"] #quoteDisplay {
+    color: rgba(240, 224, 232, 0.8);
+    text-shadow: 
+        0 1px 16px rgba(0, 0, 0, 0.8),
+        0 2px 40px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] #quoteDisplay::before,
+[data-theme="dark"] #quoteDisplay::after {
+    color: rgba(255, 77, 122, 0.2);
+}
+
+[data-theme="dark"] #quoteDisplay .line {
+    background: linear-gradient(90deg, transparent, rgba(255, 77, 122, 0.15), transparent);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+    #quoteContainer {
+        top: 5vh;
+        padding: 0 16px;
+        max-width: 500px;
+    }
+
+    #quoteDisplay {
+        font-size: clamp(13px, 2.2vw, 18px);
+        padding: 4px 14px;
+    }
+
+    #quoteDisplay::before,
+    #quoteDisplay::after {
+        font-size: 1.2em;
+    }
+
+    #quoteDisplay::before {
+        top: -3px;
+        left: -3px;
+    }
+
+    #quoteDisplay::after {
+        bottom: -3px;
+        right: -3px;
+    }
+
+    #quoteDisplay .line {
+        width: 25px;
+        margin: 3px auto 0;
+    }
+}
+
+@media (max-width: 480px) {
+    #quoteContainer {
+        top: 5vh;
+        padding: 0 14px;
+        max-width: 400px;
+    }
+
+    #quoteDisplay {
+        font-size: clamp(12px, 2.5vw, 16px);
+        padding: 4px 12px;
+        letter-spacing: 0.2px;
+    }
+
+    #quoteDisplay::before,
+    #quoteDisplay::after {
+        font-size: 1em;
+    }
+
+    #quoteDisplay::before {
+        top: -2px;
+        left: -2px;
+    }
+
+    #quoteDisplay::after {
+        bottom: -2px;
+        right: -2px;
+    }
+
+    #quoteDisplay .line {
+        width: 20px;
+        height: 1.5px;
+        margin: 2px auto 0;
+    }
+}
+
+@media (max-width: 380px) {
+    #quoteContainer {
+        top: 5vh;
+        padding: 0 10px;
+    }
+
+    #quoteDisplay {
+        font-size: clamp(10px, 2.8vw, 14px);
+        padding: 3px 10px;
+    }
+
+    #quoteDisplay::before,
+    #quoteDisplay::after {
+        display: none;
+    }
+
+    #quoteDisplay .line {
+        width: 16px;
+        height: 1px;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY - Reduced Motion
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+    #quoteDisplay {
+        transition: none !important;
+    }
+}
     </style>
 </head>
 <body>
@@ -338,7 +548,16 @@
     <!-- Glass Play/Pause Button -->
 <button id="playBtn">▶</button>
 
-    <!-- for love animation javascript first editon [269 line to 371 line]-->
+<!-- ========================================
+     QUOTE - Message Style (Between Top & Heading)
+     ======================================== -->
+<div id="quoteContainer">
+    <div id="quoteDisplay">
+        <span id="quoteContent">You are my sunshine</span>
+    </div>
+</div>
+
+    <!-- for love animation javascript first editon [269 line to 371 line]--> 
     <script> 
         const canvas = document.getElementById('heart-canvas');
 const ctx = canvas.getContext('2d');
@@ -483,7 +702,71 @@ audio.addEventListener('error', function() {
         playBtn.textContent = '▶';
     }, 2000);
 });
+// =========================================
+// QUOTES - Message Style (Small, Centered)
+// =========================================
+(function() {
+    const quotes = [
+        "You are my sunshine",
+        "Forever & always",
+        "You complete me",
+        "My heart belongs to you",
+        "You make me smile",
+        "Together is my favorite place",
+        "Love you to the moon and back",
+        "You're my happy place",
+        "My one and only",
+        "Best decision ever",
+        "You're my everything",
+        "I choose you, always",
+        "You're my soulmate",
+        "Endless love",
+        "Perfect together",
+        "You're my dream come true",
+        "All for you",
+        "Always & forever",
+        "You're my world",
+        "I love you",
+        "You are my reason",
+        "My heart is yours",
+        "You're my forever",
+        "Every day with you is a gift",
+        "You are my greatest adventure",
+        "You're my missing piece",
+        "My love for you grows daily",
+        "You're my peaceful place",
+        "Together we shine",
+        "You're my favorite hello"
+    ];
 
+    const display = document.getElementById('quoteDisplay');
+    const content = document.getElementById('quoteContent');
+    let currentIndex = 0;
+
+    function showNextQuote() {
+        const quote = quotes[currentIndex];
+        content.textContent = quote;
+        
+        // Show with animation
+        display.classList.remove('fading');
+        display.classList.add('visible');
+        
+        // Move to next index
+        currentIndex = (currentIndex + 1) % quotes.length;
+        
+        // Hide after 4 seconds (shorter for message style)
+        setTimeout(() => {
+            display.classList.remove('visible');
+            display.classList.add('fading');
+            
+            // Show next quote after brief pause
+            setTimeout(showNextQuote, 1200);
+        }, 5000);
+    }
+
+    // Start the rotation
+    setTimeout(showNextQuote, 800);
+})();
     </script>
 </body>
 </html>
